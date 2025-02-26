@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:soul_app/features.auth/presentation/bloc/auth_bloc.dart';
+import 'package:soul_app/features.auth/presentation/bloc/auth_event.dart';
+import 'package:soul_app/features.auth/presentation/bloc/auth_state.dart';
 import 'package:soul_app/features.auth/presentation/widgets/auth_button.dart';
 
 import 'package:soul_app/features.auth/presentation/widgets/auth_input_field.dart';
@@ -60,7 +64,25 @@ class _LoginPageState extends State<LoginPage> {
                 isPassword: true,
               ),
               SizedBox(height: 20),
-              AuthButton(text: 'Login', onPressed: _onLoginTapped),
+              BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
+                if (state is AuthLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return AuthButton(
+                  text: 'Login',
+                  onPressed: _onLoginTapped,
+                );
+              }, listener: (context, state) {
+                if (state is AuthSuccess) {
+                  Navigator.pushNamed(context, '/login');
+                } else if (state is AuthFailure) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.error)));
+                }
+              }),
+              // AuthButton(text: 'Login', onPressed: _onLoginTapped),
               SizedBox(height: 20),
               LoginPrompt(
                 title: "Don't have an account? ",
@@ -78,11 +100,17 @@ class _LoginPageState extends State<LoginPage> {
     String emailValue = _emailController.value.text.trim();
     String passwordValue = _passwordController.value.text.trim();
 
-    final payloadLogin = {
-      'email': emailValue,
-      'password': passwordValue,
-    };
+    if (emailValue.isEmpty || passwordValue.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please fill all fields')));
+      return;
+    }
 
-    print(payloadLogin);
+    // gửi sự kiện Register đến AuthBloc
+    // sau khi sự kiện RegisterEvent được gọi thì `Bloc` sẽ gọi _onRegister() để xử lý
+    BlocProvider.of<AuthBloc>(context).add(LoginEvent(
+      email: emailValue,
+      password: passwordValue,
+    ));
   }
 }

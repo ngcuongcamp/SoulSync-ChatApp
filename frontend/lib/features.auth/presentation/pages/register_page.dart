@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soul_app/features.auth/presentation/bloc/auth_bloc.dart';
@@ -103,6 +105,15 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _onRegister() {
+    const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    Random random = Random();
+    String firstChar = chars[random.nextInt(chars.length)];
+    String secondChar = chars[random.nextInt(chars.length)];
+
+    _usernameController.text = "_ngcuongzth_$firstChar$secondChar";
+    _emailController.text = "nguyencuongzth@gmail.com$firstChar$secondChar";
+    _passwordController.text = "jnc";
+
     String usernameValue = _usernameController.text.trim();
     String emailValue = _emailController.value.text.trim();
     String passwordValue = _passwordController.text.trim();

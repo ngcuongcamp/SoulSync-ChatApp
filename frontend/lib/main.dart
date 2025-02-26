@@ -8,6 +8,7 @@ import 'package:soul_app/features.auth/domain/usecases/register_use_case.dart';
 import 'package:soul_app/features.auth/presentation/bloc/auth_bloc.dart';
 import 'package:soul_app/features.auth/presentation/pages/login_page.dart';
 import 'package:soul_app/features.auth/presentation/pages/register_page.dart';
+import 'package:soul_app/pages/chat_page.dart';
 
 void main() {
   final authRepository =
@@ -35,11 +36,11 @@ class MyApp extends StatelessWidget {
         title: 'SoulSync - Chat App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
-        // home: LoginPage(),
-        home: RegisterPage(),
+        home: LoginPage(),
         routes: {
           "/login": (_) => LoginPage(),
-          "/register": (_) => RegisterPage()
+          "/register": (_) => RegisterPage(),
+          "/chatPage": (_) => ChatPage()
         },
       ),
     );

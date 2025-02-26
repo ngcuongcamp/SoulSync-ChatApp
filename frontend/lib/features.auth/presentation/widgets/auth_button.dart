@@ -16,7 +16,7 @@ class AuthButton extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           padding: EdgeInsets.symmetric(vertical: 14)),
       child: Text(
-        'Register',
+        text,
         style: TextStyle(color: Colors.grey),
       ),
     );

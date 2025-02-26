@@ -17,7 +17,8 @@ class AuthRemoteDataSource {
         }),
         headers: {'Content-Type': 'application/json'});
 
-    return UserModel.fromJson(jsonDecode(response.body));
+    final dataUser = jsonDecode(response.body)['result'];
+    return UserModel.fromJson(dataUser);
   }
 
   Future<UserModel> register({
@@ -37,9 +38,14 @@ class AuthRemoteDataSource {
         'Accept': 'application/json',
       },
     );
+    final responseData = jsonDecode(response.body);
 
-    // print(response.body);
+    final dataUser = {
+      'id': responseData['userId'],
+      'username': username,
+      'email': email,
+    };
 
-    return UserModel.fromJson(jsonDecode(response.body));
+    return UserModel.fromJson(dataUser);
   }
 }
