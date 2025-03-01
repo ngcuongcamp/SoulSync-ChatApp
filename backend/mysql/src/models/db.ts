@@ -11,6 +11,15 @@ const pool = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
+    typeCast: function (field, next) {
+        if (field.type === "TINY" && field.length === 1) {
+            return field.string() === "1"; // Chuyển TINYINT(1) thành boolean
+        }
+        if (field.type === "BLOB") {
+            return field.string(); // Chuyển BLOB thành string
+        }
+        return next();
+    }
 });
 
 
