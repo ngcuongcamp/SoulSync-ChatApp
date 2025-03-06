@@ -2,7 +2,7 @@
 /// Thực hiện lấy dữ liệu từ API
 
 import 'dart:convert';
-import 'package:soul_app/features.auth/data/models/user_model.dart';
+import 'package:soul_app/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRemoteDataSource {

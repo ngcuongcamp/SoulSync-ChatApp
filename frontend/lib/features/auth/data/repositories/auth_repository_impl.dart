@@ -6,11 +6,11 @@
     + `đóng vai trò trung gian`, giúp việc thay đổi nguồn dữ liệu (`API mới, database mới`) mà không ảnh hưởng đến `domain layer`
  */
 
-import 'package:soul_app/features.auth/data/datasources/auth_remote_data_source.dart';
-import 'package:soul_app/features.auth/domain/entities/user_entity.dart';
-import 'package:soul_app/features.auth/domain/repositories/auth_respository.dart';
+import 'package:soul_app/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:soul_app/features/auth/domain/entities/user_entity.dart';
+import 'package:soul_app/features/auth/domain/repositories/auth_respository.dart';
 
-class AuthRepositoryImpl implements AuthRespository {
+class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
 
   AuthRepositoryImpl({required this.authRemoteDataSource});

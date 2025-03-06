@@ -1,6 +1,6 @@
 // chứa thông tin người udng, chuyển đổi từ JSON
 
-import 'package:soul_app/features.auth/domain/entities/user_entity.dart';
+import 'package:soul_app/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   UserModel({

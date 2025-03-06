@@ -15,24 +15,32 @@ router.get('/', verityToken, async (req: Request, res: Response) => {
     try {
         const result = await pool.query(
             `
-            SELECT conversations.id as conversation_id,
-                users.username as participant_name,
-                messages.content as last_message,
-                messages.created_at as last_message_time
-            FROM conversations
-            JOIN users ON (users.id = conversations.participant_two AND conversations.id != $1)
-            LEFT JOIN LATERAL (
-                SELECT content, created_at FROM messages
-                WHERE conversation_id = conversations.id
-                ORDER BY created_at DESC
-                LIMIT 1
-            ) messages ON true
-            WHERE conversations.participant_one = $1 OR conversations.participant_two = $1
-            ORDER BY messages.created_at DESC;
-            `, [userId]
+        SELECT
+            c.id AS conversation_id,
+            CASE
+                WHEN c.participant_one = ? THEN u2.username
+                ELSE u1.username
+            END AS participant_name,
+            m.content AS last_message,
+            m.created_at AS last_message_time
+        FROM conversations c
+        JOIN users u1 ON u1.id = c.participant_two
+        JOIN users u2 ON u2.id = c.participant_one
+        LEFT JOIN messages m
+            ON m.conversation_id = c.id
+            AND m.created_at = (
+                SELECT MAX(created_at)
+                FROM messages m2
+                WHERE m2.conversation_id = c.id
+            )
+        WHERE c.participant_one = ?
+            OR c.participant_two = ?
+        ORDER BY m.created_at DESC
+            `, [userId, userId, userId]
         );
 
-        console.log(result)
+        console.log(result[0])
+        res.status(200).json(result[0]);
 
     }
     catch (error) {

@@ -5,10 +5,10 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:soul_app/features.auth/domain/usecases/login_use_case.dart';
-import 'package:soul_app/features.auth/domain/usecases/register_use_case.dart';
-import 'package:soul_app/features.auth/presentation/bloc/auth_event.dart';
-import 'package:soul_app/features.auth/presentation/bloc/auth_state.dart';
+import 'package:soul_app/features/auth/domain/usecases/login_use_case.dart';
+import 'package:soul_app/features/auth/domain/usecases/register_use_case.dart';
+import 'package:soul_app/features/auth/presentation/bloc/auth_event.dart';
+import 'package:soul_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

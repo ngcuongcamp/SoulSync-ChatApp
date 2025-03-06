@@ -1,9 +1,9 @@
-import 'package:soul_app/features.auth/domain/repositories/auth_respository.dart';
-import 'package:soul_app/features.auth/domain/entities/user_entity.dart';
+import 'package:soul_app/features/auth/domain/repositories/auth_respository.dart';
+import 'package:soul_app/features/auth/domain/entities/user_entity.dart';
 
 class RegisterUseCase {
   // gọi đến AuthRepository để thực hiện logic đăng ký
-  final AuthRespository repository;
+  final AuthRepository repository;
 
   RegisterUseCase({required this.repository});
 

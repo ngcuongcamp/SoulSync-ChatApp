@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:soul_app/core/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:soul_app/features.auth/data/datasources/auth_remote_data_source.dart';
-import 'package:soul_app/features.auth/data/repositories/auth_repository_impl.dart';
-import 'package:soul_app/features.auth/domain/usecases/login_use_case.dart';
-import 'package:soul_app/features.auth/domain/usecases/register_use_case.dart';
-import 'package:soul_app/features.auth/presentation/bloc/auth_bloc.dart';
-import 'package:soul_app/features.auth/presentation/pages/login_page.dart';
-import 'package:soul_app/features.auth/presentation/pages/register_page.dart';
+import 'package:soul_app/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:soul_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:soul_app/features/auth/domain/usecases/login_use_case.dart';
+import 'package:soul_app/features/auth/domain/usecases/register_use_case.dart';
+import 'package:soul_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:soul_app/features/auth/presentation/pages/login_page.dart';
+import 'package:soul_app/features/auth/presentation/pages/register_page.dart';
+import 'package:soul_app/features/conversation/presentation/pages/conversations_page.dart';
 import 'package:soul_app/pages/chat_page.dart';
 
 void main() {
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         routes: {
           "/login": (_) => LoginPage(),
           "/register": (_) => RegisterPage(),
-          "/chatPage": (_) => ChatPage()
+          "/chatPage": (_) => ChatPage(),
+          "/conversations": (_) => ConversationsPage(),
         },
       ),
     );
