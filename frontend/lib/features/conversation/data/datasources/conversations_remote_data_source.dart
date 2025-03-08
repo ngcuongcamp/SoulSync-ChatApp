@@ -14,8 +14,9 @@ class ConversationsRemoteDataSource {
         await http.get(Uri.parse('$baseUrl/conversations'), headers: {
       'Authorization': 'Beare $token',
     });
+
     if (response.statusCode == 200) {
-      List data = jsonDecode(response.body);
+      List<dynamic> data = jsonDecode(response.body);
       return data.map((json) => ConversationModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to fetch conversations');

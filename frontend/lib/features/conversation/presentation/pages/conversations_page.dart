@@ -17,9 +17,28 @@ class ConversationsPage extends StatefulWidget {
 class _ConversationsPageState extends State<ConversationsPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    // Thêm sự kiện FetchConversations vào ConversationsBloc
+
+    /**
+     * --> LẤY ĐỐI TƯỢNG `ConversationsBloc` từ cây widget sử dụng `BlocProvider`
+     * 
+     * `BlocProvider.of<ConversationsBloc>(context)`
+     * `BlocProvider` là một widget cung cấp một `Bloc` cho các widget con của nó 
+     * `of<ConversationsBloc>(context) là một phương thức tìm kiếm trong `widget` để lấy `BlocProvider` gần nhất của loại `ConversationsBloc` và trả về một đối tượng `ConversationsBloc`
+     * 
+     */
     BlocProvider.of<ConversationsBloc>(context).add(FetchConversations());
+
+    /**
+     * --> THÊM MỘT SỰ KIỆN VÀO `ConversationsBloc`
+     * `.add(FetchConversationsBloc())
+     * `FetchConversations` là một sự kiện mà `ConversationsBloc` sẽ xử lý. Khi * sự kiện này được thêm vào, `conversationsBloc` sẽ thực thi logic liên * * quan đến việc lấy danh sách vào cuộc trò chuyện
+     */
+
+    /**
+     * Được thực hiện khi initState() được gọi, nó sẽ thực thi logic lấy danh sách cuộc trò chuyện từ `ConversationsBloc`
+     */
   }
 
   @override
@@ -32,6 +51,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
         ),
         centerTitle: false,
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 70,
         actions: [
@@ -70,7 +90,16 @@ class _ConversationsPageState extends State<ConversationsPage> {
               ),
             ),
             child: BlocBuilder<ConversationsBloc, ConversationsState>(
+              /**
+               * BlocBuilder là một widget, chịu trách nghiệm lắng nghe các thay đổi trong trạng thái Bloc và rebuild lại UI người dùng mỗi khi state change 
+               * - nó nhận vào 2 tham  số kiểu: ConversationsBloc và ConversationsState
+               */
               builder: (context, state) {
+                /**
+                 * builder là một hàm xây dựng nhận 2 tham số là context và state 
+                 * context: là ngữ cảnh của widget hiện tại 
+                 * state là trạng thái hiện tại của ConversationsState
+                 */
                 if (state is ConversationsLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -88,7 +117,9 @@ class _ConversationsPageState extends State<ConversationsPage> {
                 } else if (state is ConversationsError) {
                   return Center(child: Text(state.error));
                 } else {
-                  return Center();
+                  return Center(
+                    child: Text('No conversations'),
+                  );
                 }
               },
             ),

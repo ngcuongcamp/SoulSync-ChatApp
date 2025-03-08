@@ -3,12 +3,12 @@ import 'package:soul_app/features/conversation/domain/entities/conversation_enti
 import 'package:soul_app/features/conversation/domain/repositories/conversation_repository.dart';
 
 class ConversationsRepositoryImpl implements ConversationsRepository {
-  final ConversationsRemoteDataSource remoteDataSource;
+  final ConversationsRemoteDataSource conversationsRemoteDataSource;
 
-  ConversationsRepositoryImpl(this.remoteDataSource);
+  ConversationsRepositoryImpl({required this.conversationsRemoteDataSource});
 
   @override
   Future<List<ConversationEntity>> fetchConversations() async {
-    return await remoteDataSource.fetchConversations();
+    return await conversationsRemoteDataSource.fetchConversations();
   }
 }

@@ -6,7 +6,7 @@ import 'package:soul_app/features/conversation/presentation/bloc/conversations_s
 class ConversationsBloc extends Bloc<ConversationEvent, ConversationsState> {
   final FetchConversationsUseCase fetchConversationsUseCase;
 
-  ConversationsBloc(this.fetchConversationsUseCase)
+  ConversationsBloc({required this.fetchConversationsUseCase})
       : super(ConversationsInitial()) {
     on<FetchConversations>(_onFetchConversations);
   }
@@ -18,6 +18,7 @@ class ConversationsBloc extends Bloc<ConversationEvent, ConversationsState> {
       final conversations = await fetchConversationsUseCase();
       emit(ConversationsLoaded(conversations: conversations));
     } catch (error) {
+      print(error);
       emit(ConversationsError(error: 'Failed to load conversations!'));
     }
   }

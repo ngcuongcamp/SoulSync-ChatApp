@@ -9,8 +9,9 @@ class ConversationModel extends ConversationEntity {
   });
 
   factory ConversationModel.fromJson(Map<String, dynamic> json) {
+    
     return ConversationModel(
-      id: json['conversation_id'],
+      id: json['conversation_id'].toString(),
       participantName: json['participant_name'],
       lastMessage: json['last_message'],
       lastMessageTime: json['last_message_time'],
