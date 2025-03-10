@@ -12,7 +12,7 @@ import 'package:soul_app/features/conversation/data/repositories/conversations_r
 import 'package:soul_app/features/conversation/domain/usecases/fetch_conversations_use_case.dart';
 import 'package:soul_app/features/conversation/presentation/bloc/conversations_bloc.dart';
 import 'package:soul_app/features/conversation/presentation/pages/conversations_page.dart';
-import 'package:soul_app/pages/chat_page.dart';
+import 'package:soul_app/features/chat/presentation/pages/chat_page.dart';
 import 'package:soul_app/features/conversation/data/datasources/conversations_remote_data_source.dart';
 
 void main() {
